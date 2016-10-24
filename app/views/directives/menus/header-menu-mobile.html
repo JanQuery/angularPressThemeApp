@@ -1,0 +1,38 @@
+<ul class="collapsible" data-collapsible="expandable" sidenav-collapsible>
+    <li ng-repeat="hmm in ::headerMenuMobile" ng-if="headerMenu != 0">
+        <div class="collapsible-header">
+        
+            <a ng-href="{{hmm.url}}" ng-hide="hmm.children != 0" onclick="$('.button-collapse').sideNav('hide');">
+
+            {{hmm.title}}
+            
+            </a>
+            
+            <a ng-show="hmm.children != 0" ng-click="toggleRotateIcon($index)">
+
+                {{hmm.title}} 
+                
+                <i id="chevron-mobile-menu-{{$index}}" class="fa fa-chevron-down right" aria-hidden="true"></i>
+
+            </a>
+            
+        
+        </div>
+        <div class="collapsible-body" ng-if="hmm.children != 0" style="padding: 0;">
+            <ul style="padding-left: 30px;">
+               <li>
+                   
+                   <a ng-href="{{hmm.url}}" onclick="$('.button-collapse').sideNav('hide');">{{hmm.title}}</a>
+                   
+               </li>
+                   <ul style="padding-left: 25px;">
+                        <li ng-repeat="cm in hmm.children">
+
+                            <a ng-href="{{cm.url}}" onclick="$('.button-collapse').sideNav('hide');">{{cm.title}}</a>
+
+                        </li>
+                   </ul>
+            </ul>
+        </div>
+    </li>
+</ul>

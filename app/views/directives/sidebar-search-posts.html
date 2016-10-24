@@ -1,0 +1,56 @@
+<aside>
+    <nav class="search-panel">
+        <div class="nav-wrapper">
+            <div class="input-field">
+                <input id="searchsidebar" placeholder="Search post" type="search" name="s" ng-model="filtersidebar.s" ng-change="searchsidebar()" ng-minlength="5" ng-focus="focusSidbarSearch=true;blurSidbarSearch=false;" ng-blur="blurSidbarSearch=true;focusSidbarSearch=false;" required>
+                <label for="searchsidebar"><i class="material-icons"><i class="fa fa-search" aria-hidden="true"></i></i></label>
+                <i class="material-icons" ng-click="resetSearchinpostssidebar()"><i class="fa fa-times" aria-hidden="true"></i></i>
+            </div>
+        </div>
+    </nav>
+</aside>
+<br>
+
+<aside class="container" ng-show="!filtersidebar.s && !blurSidbarSearch && focusSidbarSearch">
+    <div class="row">
+    <div class=" col s12 card-panel">
+            <div class="card-content">
+                <div class="p-in-sidebar">
+                    <p>Bitte geben Sie mindestens 5 Buchstaben ein</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<aside class="container" ng-show="postsinsidebar.length < 1 && filtersidebar.s != 0">
+    <div class="row">
+    <div class=" col s12 card-panel">
+            <div class="card-content">
+                <div class="p-in-sidebar">
+                    <p>Ups! </p>
+                    <p>Unter Ihrem Suchbegriff wurde nichts gefunden.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<aside class="container" ng-repeat="post in postsinsidebar">
+    <div class="row">
+        <div class=" col s10 offset-s1 card-panel hoverable">
+            <div class="card-image center" ng-repeat="img in thumbnailinsidebar | filterBy: ['id']: post.featured_media">
+                <img id="img-sidebar-search-posts" ng-src="{{img.media_details.sizes.medium.source_url}}">
+            </div>
+            <div class="card-content nano nano-sidebar" nanoscroller>
+                <div class="nano-content p-in-sidebar">
+                    <b><span class="card-title bolder black-text" ng-bind-html="post.title.rendered"></span></b>
+                    <p ng-bind-html="post.content.rendered"></p>
+                </div>
+            </div>
+            <div class="card-action">
+                <a ui-sref="contentDetails({slug: post.slug})" ng-click="resetSearchinpostsSidebar()" class="waves-effect waves-teal btn-flat blue-text">read more</a>
+            </div>
+        </div>
+    </div>
+</aside>

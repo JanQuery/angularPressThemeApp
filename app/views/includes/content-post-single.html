@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row" ng-repeat="po in posts | where: {'slug': slugParam}">
+    
+        <h1 ng-bind-html="po.title.rendered"></h1>
+        <p class="flow-text" ng-bind-html="po.content.rendered"></p>
+
+    </div>
+    <div class="row" ng-if="is404">
+    
+            <h1>Post Not Found</h1>
+            <p class="flow-text">Sorry, somethings went wrong</p>
+
+
+    </div>
+</div>
+{{initFeatures()}}

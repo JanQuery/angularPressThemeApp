@@ -1,0 +1,16 @@
+<div id="no-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+        <div class="container" ng-class="{'right': wpPosition == 'right', 'left': wpPosition == 'left', 'center': wpPosition == 'center'}">
+            <br>
+            <br>
+            <div class="card-panel see-through" ng-class="{'right': wpPosition == 'right', 'left': wpPosition == 'left', 'center': wpPosition == 'center'}">
+                <h1 class="header">&nbsp;{{wpHeader}}</h1>
+                <div class="row">
+                    <h5 class="header col s12 light">&nbsp;{{wpText}}</h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="parallax" parallax><img lazy-img="{{wpSrc}}" alt="background img 1" /></div>
+</div>

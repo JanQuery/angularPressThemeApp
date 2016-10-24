@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="row footer-menu no-margin-bottom">
+        <ul class="right as-menu">
+            <li ng-repeat="fm in ::footerMenu" ng-if="footerMenu != 0" footer-dropdown-button>
+                <a ng-href="{{fm.url}}" ng-class="{'footer-dropdown-button' : fm.children != 0}" class="waves-effect waves-teal btn-flat white-text" data-activates='footer-dropdown-{{fm.ID}}'>
+        {{fm.title}} <i ng-show="fm.children != 0" class="material-icons right">arrow_drop_down</i>
+    </a>
+                <ul id="footer-dropdown-{{fm.ID}}" class="dropdown-content" ng-if="fm.children != 0">
+                    <li ng-repeat="c in fm.children">
+                        <a ng-href="{{c.url}}">{{c.title}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

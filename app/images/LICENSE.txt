@@ -1,0 +1,11 @@
+background1.jpg
+
+source: https://pixabay.com/de/computer-smartphone-online-digital-1231889/
+
+license: CC0 Public Domain
+
+default-logo.png
+
+made by webdesignofpassion.de
+
+license: CC0 Public Domain

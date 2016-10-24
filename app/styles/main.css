@@ -1,0 +1,525 @@
+/*
+Theme Name: AngularPressThemeApp
+Theme URI: www.webdesignofpassion.de
+Author: webdesignofpassion.de
+Author URI: http://www.webdesignofpassion.de/
+Description: AngularPressThemeApp <br>Wordpress as Backend <br>Angular.js in Frontend <br>A lightweight, fast and highly modern combination <br><br>Beautiful, modern and responsive design. Great Feautures included, like, Multilanguage, Parallax images, menus, sidebars. Allready build in directive to customize easilly to fit your need. FREE!
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: angular, material, material design, multilanguage, responsive, json, api, modern, blue, green, customize, free
+Text Domain: angularpressthemeapp
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+/**
+ * 1.0 - set/ reset HTML
+ *
+ * setting and reseting main HTML style
+ * making footer sticky
+ * reseting h1 & h2 tag to fit long text to small screen size
+ * setting parallax container properties
+ */
+
+div#page {
+    display: flex;
+    min-height: 95vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    min-height: 300px;
+}
+footer.page-footer {
+    margin: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+h1 {
+    font-size: 2.6rem;
+}
+h2 {
+    font-size: 2.2rem;
+}
+}
+
+.parallax-container {
+    min-height: 380px;
+    line-height: 0;
+    height: auto;
+    color: rgba(255, 255, 255, .9);
+}
+
+.parallax-container .section {
+    width: 100%;
+}
+
+#img-content-searh-posts {
+    width: 200px;
+    max-height: 200px
+}
+
+#img-sidebar-search-posts {
+    width: 150px;
+    max-height: 150px;
+}
+/**
+ * 2.0 - trouble shooting
+ *
+ * Materialize.css
+ * retting z-index to overlay and page to display overlay on click .button-collapse class button
+ */
+
+#page {
+    z-index: 11;
+    position: relative;
+}
+
+#sidenav-overlay {
+    z-index: 10
+}
+
+#close-sidenav-btn{
+    padding-top: 20px;
+}
+
+/**
+ * 3.0 - style Wordpress classes
+ *
+ * 
+ */
+
+.as-menu li {
+    display: inline-block;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0px;
+}
+
+.widget {
+    padding: 10px 0;
+}
+
+div.widget ul{
+    padding: 0 15px 0 15px;
+}
+
+.widget div {
+    padding: 0 0 0 30px;
+}
+li.cat-item,
+.widget_rss ul li {
+    padding: 0px 15px;
+}
+
+.widget-title {
+	padding: 20px 0 20px 20px;
+}
+h3.widget-title a.rsswidget {
+    padding: -15px 0 -15px 0;
+}
+
+li.cat-item a,
+ul.menu li a,
+ul.menu li ul.sub-menu a,
+div.widget ul li a {
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    outline: 0;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+
+.aligncenter {
+    display: block;
+   	margin-left: auto;
+	margin-right: auto;
+}
+.alignleft {
+    float: left;
+    margin: 0.5em 1em 0.5em 0;
+}
+.alignright {
+    float: right;
+    margin: 0.5em 0 0.5em 1em;
+}
+
+
+/**
+ * 4.0 - custom style
+ *
+ * 
+ */
+
+.see-through {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+@media only screen and (max-width: 992px) {
+    .parallax-container .section {
+        position: absolute;
+        top: 40%;
+    }
+    #banner .section,
+    #no-banner .section {
+        top: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #banner .section,
+    #no-banner .section {
+        top: 0;
+    }
+    .parallax-container .section .container {
+        text-align: center!important;
+        float: none!important;
+    }
+}
+
+.bolder {
+    font-weight: 600!important;
+}
+
+.force-show {
+    visibility: visible!important;
+}
+
+.force-hide {
+    visibility: hidden!important;
+}
+
+nav i {
+    font-size: 2.7rem;
+    height: 56px;
+    line-height: 56px;
+    padding: 0 5px 0 5px;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+div.nano-content h1,
+div.nano-content h2,
+div.nano-content h3,
+div.nano-content h4,
+div.nano-content h5,
+div.nano-content h6 {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+/* Widget Style */
+li.cat-item a,
+.widget a {
+    color: #039be5;
+    background-color: #fff;
+}
+
+li.cat-item a:hover,
+.widget a:hover {
+    background-color: #56c9ff;
+    color: #fff;
+}
+
+.widget-title,
+h3.widget-title a.rsswidget{
+    background-color: #42A5F5 !important;
+    color: #fff;
+}
+
+.widget {
+    padding: 10px 0;
+}
+
+div.widget ul{
+    padding: 0 15px 0 15px;
+}
+
+.widget div {
+    padding: 0 0 0 30px;
+}
+li.cat-item,
+.widget_rss ul li {
+    padding: 0px 15px;
+}
+
+.widget-title {
+	padding: 20px 0 20px 20px;
+}
+h3.widget-title a.rsswidget {
+    padding: -15px 0 -15px 0;
+}
+
+li.cat-item a,
+ul.menu li a,
+ul.menu li ul.sub-menu a,
+div.widget ul li a {
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    outline: 0;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+
+/* Animation classes */
+
+.none-visible {
+    opacity: 0;
+}
+
+[ui-view].ng-enter {
+  animation: 1.5s fadeIn;
+}
+
+[ui-view].ng-enter-active {
+  animation: 1.5s fadeIn;
+}
+
+[ui-view].ng-leave {
+  opacity: 0; 
+}
+
+[ui-view].ng-leave-active {
+  opacity: 0; 
+}
+
+.rotate-icon {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/************************************************************************************************
+    Color Schema - light blue
+************************************************************************************************/
+
+nav,
+footer {
+    background-color: #1e88e5 !important;
+}
+
+footer div.footer-menu {
+    background-color: #1976D2 !important;
+}
+
+footer div.footer-copyright {
+    background-color: #0d47a1 !important;
+}
+
+footer div.textwidget,
+footer div.footer-menu .material-icons {
+    color: #fff;
+}
+
+
+nav.search-panel {
+    background-color: #42a5f5 !important;
+}
+nav ul a,
+nav .brand-logo,
+nav .material-icons {
+    color: #fff;
+}
+
+h1.header {
+    color: #64B5F6 !important;
+}
+
+.material-icons {
+    color: #000;
+}
+
+blockquote {
+    border-left: 5px solid blue;
+}
+a {
+    color: #039be5;
+}
+
+.p-in-sidebar {
+    color: #000;
+    line-height: 32px;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
+    color: darkblue;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating):hover {
+    color: lightblue;
+}
+
+.pagination li.active {
+    background-color: darkblue;
+}
+
+li.cat-item a,
+.widget a {
+    color: #039be5;
+    background-color: #fff;
+}
+
+li.cat-item a:hover,
+.widget a:hover {
+    background-color: #56c9ff;
+    color: #fff;
+}
+
+.widget-title,
+h3.widget-title a.rsswidget{
+    background-color: #42A5F5 !important;
+    color: #fff;
+}
+
+/************************************************************************************************
+    slidr
+    Copyright (c) 2013 Alberto Varela
+    MIT License
+************************************************************************************************/
+
+.sidr {
+  display: block;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: 999999;
+  width: 90%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #f8f8f8;
+  color: #333;
+  box-shadow: 0 0 5px 5px #ebebeb inset;
+}
+
+.sidr.right {
+  left: auto;
+  right: -90%;
+}
+.sidr.left {
+  left: -90%;
+  right: auto;
+}
+
+
+
+/************************************************************************************************
+    nanoScroller.css
+    Copyright (c) 2012 James Florentino
+    MIT License
+************************************************************************************************/
+
+
+/** initial setup **/
+
+.nano-sidebar {
+    height: 150px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.nano-page {
+    height: 200px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.nano-content {
+    height: 250px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.nano > .nano-content {
+    position: absolute;
+    overflow: scroll;
+    overflow-x: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.nano > .nano-content:focus {
+    outline: thin dotted;
+}
+
+.nano > .nano-content::-webkit-scrollbar {
+    display: none;
+}
+
+.has-scrollbar > .nano-content::-webkit-scrollbar {
+    display: block;
+}
+
+.nano > .nano-pane {
+    background: rgba(0, 0, 0, .25);
+    position: absolute;
+    width: 10px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    visibility: hidden\9;
+    /* Target only IE7 and IE8 with this hack */
+    opacity: .01;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.nano > .nano-pane > .nano-slider {
+    background: #444;
+    background: rgba(0, 0, 0, .5);
+    position: relative;
+    margin: 0 1px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.nano:hover > .nano-pane,
+.nano-pane.active,
+.nano-pane.flashed {
+    visibility: visible\9;
+    /* Target only IE7 and IE8 with this hack */
+    opacity: 0.99;
+}

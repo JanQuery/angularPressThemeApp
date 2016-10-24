@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    
+  </head>
+  <body>
+   <div id="page" ng-app="angularPressThemeApp">
+        
+<!-- Navigation in header - navbar -->
+        <div class="navbar-fixed">
+
+            <nav id="site-navigation" class="main-navigation" role="navigation" button-collapse>
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand-logo">
+                    <?php if ( get_theme_mod( 'angularpressthemeapp_logo' ) ) :
+	echo '<img src="' . esc_url( get_theme_mod( 'angularpressthemeapp_logo' ) ) . '" width="56px" height="56px" />';
+else:
+	echo '<img src="' . esc_url( get_bloginfo('template_directory') . '/app/images/default-logo.png')  . '" width="56px" height="56px" />';
+endif; ?>
+                </a>
+                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+
+                <a href="#" id="sidebar-menu" class="hide-on-large-only right"><i id="sidebar-icon" class="material-icons">format_indent_decrease</i></a>
+
+                <!-- Main Navigation on big screens -->
+                <ul class="right hide-on-med-and-down">
+                    <header-menu></header-menu>
+                </ul>
+                <!-- Main Navigation on big screens / -->
+                
+                <!-- Mobile Navigation right -->
+                <ul id="mobile-nav" class="side-nav">
+                    <li id="close-sidenav-btn" onclick="$('.button-collapse').sideNav('hide');">&nbsp;&nbsp;<i class="material-icons black-text right">close</i></li>
+                    <li class="blue-text"><a ng-href="{{blog.url}}"><h3 class="flow-text bolder">{{blog.name}}</h3></a></li>
+                    <header-menu-mobile></header-menu-mobile>
+                </ul>
+                <!-- Mobile Navigation right / -->
+                
+            </nav>
+        </div>
+<!-- Navigation in header - navbar / -->
+        
+<!-- mobile sidebar left -->
+            <apt-sidebar id="sidebar-nav" mobile-sidebar></apt-sidebar>
+<!-- mobile sidebar left / -->
+
+        <main class="container-fluid">
+            <div class="row">
+<!--Main Section - Main content -->
+                <ui-view id="main-content-view" class="col s12 l9"></ui-view>
+<!--Main Section - Main content / -->
+
+<!-- Main Sidebar on big screens -->
+                <apt-sidebar class="col l3 hide-on-med-and-down z-depth-3"></apt-sidebar>
+<!-- Main Sidebar on big screens / -->
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col m6 s12">
+                        <footer-sidebar-left></footer-sidebar-left>
+                    </div>
+                    <div class="col m6 s12">
+                        <footer-sidebar-right></footer-sidebar-right>
+                    </div>
+                </div>
+            </div>
+            <div class="hide-on-med-and-down" footer-menu footer-dropdown-button></div>
+            <div class="footer-copyright z-depth-2">
+                <div class="row">
+                    <div class="container">
+                        <span class="left white-text"><?php if ( get_theme_mod('copyright_details') ) :
+	echo get_theme_mod('copyright_details');
+else:
+	echo '&copy; 2016 webdesignofpassion.de';
+endif; ?></span> <span class="right">Theme made by <a class="brown-text text-lighten-3" href="http://webdesignofpassion.de">webdesignofpassion.de</a></span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <?php wp_footer(); ?>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+    -->
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-bind-html-compile/angular-bind-html-compile.js"></script>
+    <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+    <script src="bower_components/materialize/bin/materialize.js"></script>
+    <script src="bower_components/angular-lazy-img/release/angular-lazy-img.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/config/config.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/login.js"></script>        
+        <script src="scripts/controllers/error.js"></script>
+        <script src="scripts/services/datafactory.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

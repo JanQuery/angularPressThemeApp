@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="section">
+
+        <div class="row" ng-if="!is404">
+            <h2 ng-repeat="categoryheader in ::category">Posts by Category: {{categoryheader.name}}</h2>
+            <div class="col s12 m4" ng-repeat="pbc in postsByCategory ">
+                <div class="card hoverable">
+                    <div class="card-image" ng-repeat="img in media | filterBy: ['id']: pbc.featured_media">
+                        <img class="aligncenter" ng-src="{{img.media_details.sizes.medium_large.source_url}}">
+                    </div>
+                    <div class="card-content nano nano-page" nanoscroller>
+                        <div class="nano-content">
+                            <b><span class="card-title bolder" ng-bind-html="pbc.title.rendered"></span></b>
+                            <div class="flow-text" ng-bind-html="pbc.content.rendered"></div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a ui-sref="contentDetails({slug: pbc.slug})">read more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="error-message" class="container" ng-if="is404">
+    <div class="row">
+        <h1>Error: Category Not Found</h1>
+        <p class="flow-text">Sorry, but nothing can be found at this location</p>
+        {{initErrorMessage()}}
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="row" ng-repeat="p in ::pagesAndPost | where: {'slug': slugParam}">
+   
+    <div class="card-image center" ng-repeat="img in ::media | filterBy: ['id']: p.featured_media" ng-if="p.featured_media != 0">
+        <img ng-src="{{img.media_details.sizes.medium.source_url}}">
+    </div>
+    
+    <h1 ng-bind-html="p.title.rendered"></h1>
+    
+    <div class="flow-text" bind-html-compile="p.content.rendered"></div>
+    
+</div>
+
+<div class="row" ng-if="is404">
+   
+    <h1>Page Not Found</h1>
+    
+    <p class="flow-text">Sorry, something went wrong</p>
+    
+</div>

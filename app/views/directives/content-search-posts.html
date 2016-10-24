@@ -1,0 +1,81 @@
+<div class="container-fluid">
+        <div class="row">
+            <h2>{{blog.name}}</h2>
+
+
+            <nav class="search-panel">
+                <div class="nav-wrapper">
+                    <div class="input-field">
+                        <input id="search" placeholder="Search post" type="search" name="s" ng-model="filter.s" ng-change="search()" ng-minlength="5" ng-focus="focus=true;blur=false;" ng-blur="blur=true;focus=false;" required>
+                        <label for="search"><i class="material-icons"><i class="fa fa-search" aria-hidden="true"></i></i></label>
+                        <i class="material-icons" ng-click="resetSearchinposts()"><i class="fa fa-times" aria-hidden="true"></i></i>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="col s12" ng-show="!filter.s && !blur && focus">
+                <div class="card ">
+                    <div class="card-content">
+                        <p class="flow-text">Bitte geben Sie mindestens 5 Buchstaben ein</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col s12 card" ng-show="posts.length < 1 && filter.s != 0">
+                <div class="card-content">
+                    <p class="flow-text">Ups! </p>
+                    <p class="flow-text">Unter Ihrem Suchbegriff wurde nichts gefunden.</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4" dir-paginate="post in posts | itemsPerPage: 6">
+                <div class="card hoverable">
+                    <div class="card-image" ng-repeat="img in ::thumbnail | filterBy: ['id']: post.featured_media">
+                        <img id="img-content-searh-posts" class="aligncenter" ng-src="{{img.media_details.sizes.medium.source_url}}">
+                    </div>
+                    <div class="card-content nano nano-content">
+                        <div class="nano-content">
+                            <b><span class="card-title bolder black-text" ng-bind-html="post.title.rendered"></span></b>    
+                            <p class="flow-text" ng-bind-html="post.content.rendered"></p>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a ui-sref="contentDetails({slug: post.slug})">read more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <dir-pagination-controls boundary-links="true" class="center">
+
+
+            <br />
+            <div class="row">
+                <div class="col s4 m2">
+                    Gesamnt: {{ range.total }}
+                </div>
+                <div class="col s4 m8 center">
+                    <ul class="pagination" ng-if="1 < pages.length || !autoHide">
+                        <li ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }">
+                            <a href="" ng-click="setCurrent(1)">&laquo;</a>
+                        </li>
+                        <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }">
+                            <a href="" ng-click="setCurrent(pagination.current - 1)">&lsaquo;</a>
+                        </li>
+                        <li ng-repeat="pageNumber in ::pages track by tracker(pageNumber, $index)" ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == '...' }">
+                            <a href="" ng-click="setCurrent(pageNumber)">{{ pageNumber }}</a>
+                        </li>
+
+                        <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }">
+                            <a href="" ng-click="setCurrent(pagination.current + 1)">&rsaquo;</a>
+                        </li>
+                        <li ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == pagination.last }">
+                            <a href="" ng-click="setCurrent(pagination.last)">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </dir-pagination-controls>
+</div>
