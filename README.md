@@ -7,7 +7,7 @@ version 0.15.1.
 
 Run `grunt` for building
 
-### not
+### note
 
 `grunt serve` will not work. It´s a Wordpress Theme. You have to have a running Wordpress installation.
 
