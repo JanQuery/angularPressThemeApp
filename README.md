@@ -30,9 +30,9 @@ In order to run AngularPressTheme you have to mind the following requirements:
 <ol>
 <li>Running <b>Wordpress</b> installation</li>
 <li><b>Permalinks</b> by slug activated</li>
-<li><b>3 Plugins</b> to install and activated:</li>
 <li>download this repo in to Wordpress theme folder</li>
 <li>Within a cmd run npm install & bower install</li>
+<li><b>3 Plugins</b> to install and activated:</li>
 <ul>
     <li><a href="https://wordpress.org/plugins/rest-api/" target="_blank">WordPress REST API (Version 2)</a> by <a href="http://v2.wp-api.org/" target="_blank">WP REST API Team</a></li>
     <li><a href="https://wordpress.org/plugins/wp-api-menus/" target="_blank">WP API Menus</a> by <a href="https://github.com/unfulvio" target="_blank">Fulvio Notarstefano</a></li>
