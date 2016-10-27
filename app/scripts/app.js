@@ -83,10 +83,6 @@ angular.module('angularPressThemeApp', [
                 url: "/wp-login.php",
                 controller: "LoginCtrl"
             })
-//            .state('processForm', {
-//                url: "/processForm.php",
-//                controller: "processFormCtrl"
-//            })
             .state('errorPage', {
                 url: '/404-Error',
                 templateUrl: localizePathTo.views + '404.html',
@@ -104,7 +100,7 @@ angular.module('angularPressThemeApp', [
                 $window.location.href = url + '/wp-login.php';
             } );        
     }])
-    .controller('MainCtrl', ['$scope', '$state', '$stateParams', 'dataFactory', '$q', '$sce', function ($scope, $state, $stateParams, dataFactory, $q, $sce) {
+    .controller('MainCtrl', ['$scope', '$state', '$stateParams', 'dataFactory', '$q', function ($scope, $state, $stateParams, dataFactory, $q) {
         
         dataFactory.getBlogInfo().success(function (data) {
             
@@ -137,12 +133,10 @@ angular.module('angularPressThemeApp', [
 
             $scope.pagesAndPost = [].concat(pages.data, posts.data);
             
-            $scope.$sce = $sce;
-
         });
 
     }])
-    .controller( 'CategoriesContent', ['$scope', '$rootScope', 'dataFactory', 'categoryslug', function ($scope, $rootScope, dataFactory, categoryslug ) {
+    .controller( 'CategoriesContent', ['$scope', '$rootScope', '$filter', 'dataFactory', 'categoryslug', function ($scope, $rootScope, $filter, dataFactory, categoryslug ) {
 
         $scope.categoryslugParam = categoryslug;
 
@@ -150,7 +144,7 @@ angular.module('angularPressThemeApp', [
             
             $scope.categories = data;
 
-            $scope.category = $scope.categories.filter(function (data) {
+            $scope.category = $scope.categories.$filter(function (data) {
                 return (data.slug === $scope.categoryslugParam);
             });
             
@@ -218,7 +212,7 @@ angular.module('angularPressThemeApp', [
             },
             getPostsByName: function () {
                 return $http({
-                    url: 'wp-json/wp/v2/posts/?filter[name]=',
+                    url: 'wp-json/wp/v2/posts?filter[name]=',
                     method: 'GET',
                     cache: 'true'
                 });
@@ -274,16 +268,12 @@ angular.module('angularPressThemeApp', [
             scope: {
                 postSlug: '@postSlug'
             },
-            controller: function ($scope, $http, dataFactory) {
+            controller:  function ($scope, $http) {
 
-                var getPostSlug = $scope.postSlug;
+                var postSlug = $scope.postSlug;
 
-                $http.get('wp-json/wp/v2/posts/?filter[name]=' + getPostSlug).success(function (res) {
+                $http.get('wp-json/wp/v2/posts?filter[name]=' + postSlug).success(function (res) {
                     $scope.post = res[0];
-                });
-                
-                dataFactory.getMedia().success(function(data){
-                    $scope.media = data;
                 });
             }
         };
@@ -295,16 +285,12 @@ angular.module('angularPressThemeApp', [
             scope: {
                 pageSlug: '@pageSlug'
             },
-            controller: function ($scope, $http, dataFactory) {
+            controller: function ($scope, $http ) {
 
-                var getPageSlug = $scope.pageSlug;
+                var pageSlug = $scope.pageSlug;
 
-                $http.get('wp-json/wp/v2/pages/?filter[name]=' + getPageSlug).success(function (res) {
+                $http.get('wp-json/wp/v2/pages?filter[name]=' + pageSlug).success(function (res) {
                     $scope.page = res[0];
-                });
-                
-                dataFactory.getMedia().success(function(data){
-                    $scope.media = data;
                 });
             }
         };
@@ -316,25 +302,79 @@ angular.module('angularPressThemeApp', [
             scope: {
                 categorySlug: '=?categorySlug'
             },
-            controller: function ($scope, $http) {
+            controller:['$scope', '$http', function ($scope, $http) {
 
                 var category_slug = $scope.categorySlug.toLowerCase();
-
-                $http.get('wp-json/wp/v2/posts/?filter[category_name]=' + category_slug).success(function (res) {
-                    $scope.postsByCategory = res;
-                });
                 
-                $http.get('wp-json/wp/v2/media').success(function(data){
-                        $scope.thumbnailInPostsByCategory = data;
-                });
-            }
+
+                $http.get('wp-json/wp/v2/posts?filter[category_name]=' + category_slug).success(function (res) {
+                    $scope.postsByCategory = res;
+                    
+                });            
+                
+                
+            }]
+        };
+    })
+    .directive('featuredMedia', function() {
+        return {
+            restrict: 'EA',
+            template: '<img lazy-img="{{featuredMediaImage}}"/>',
+            scope: {
+                mediaId:    '@?mediaId',
+                mediaSize:  '@?mediaSize'
+            },
+            controller: ['$http', '$scope', function ( $http, $scope) {
+                var mediaId     = $scope.mediaId;
+                var mediaSize   = $scope.mediaSize;
+                
+                if ( mediaId !== 0 && !mediaSize) {
+                    $http.get('wp-json/wp/v2/media/' + mediaId).success(function(data){
+                        $scope.featuredMediaImage = data.media_details.sizes.medium.source_url;
+                    });
+                }
+                
+                if ( mediaId !== 0 && mediaSize === 'thumbnail' ) {
+                    $http.get('wp-json/wp/v2/media/' + mediaId).success(function(data){
+                        $scope.featuredMediaImage = data.media_details.sizes.thumbnail.source_url;
+                    });
+                }
+                
+                if ( mediaId !== 0 && mediaSize === 'medium' ) {
+                    $http.get('wp-json/wp/v2/media/' + mediaId).success(function(data){
+                        $scope.featuredMediaImage = data.media_details.sizes.medium.source_url;
+                    });
+                }
+                if ( mediaId !== 0 && mediaSize === 'full' ) {
+                    $http.get('wp-json/wp/v2/media/' + mediaId).success(function(data){
+                        $scope.featuredMediaImage = data.media_details.sizes.full.source_url;
+                    });
+                }
+                
+            }]
+//            compile: function (element, attrs, $scope) {
+//                
+////                if ( !attrs.mediaSize ) {
+////                    $scope.featuredMediaImage = $scope.featuredMediaImageById.medium.source_url;
+////                }
+////                if ( attrs.mediaSize === 'thumbnail' ) {
+////                    $scope.featuredMediaImage = $scope.featuredMediaImageById.thumbnail.source_url;
+////                }
+////                
+////                if ( attrs.mediaSize === 'medium' ) {
+////                    $scope.featuredMediaImage = $scope.featuredMediaImageById.medium.source_url;
+////                }
+////                if ( attrs.mediaSize === 'full' ) {
+////                    $scope.featuredMediaImage = $scope.featuredMediaImageById.full.source_url;
+////                }
+////            }
         };
     })
     .directive('contentSearchPosts', function () {
         return {
             restrict: 'EA',
             templateUrl: localizePathTo.views + 'directives/content-search-posts.html',
-            controller: function ($scope, $http) {
+            controller: ['$scope', '$http', function ($scope, $http) {
 
                 $scope.resetSearchinposts = function () {
                     
@@ -350,13 +390,9 @@ angular.module('angularPressThemeApp', [
                         $http.get('wp-json/wp/v2/posts/?filter[s]=' + $scope.filter.s).success(function (data) {
                             $scope.posts = data;
                         });
-                    
-                        $http.get('wp-json/wp/v2/media').success(function(data){
-                            $scope.thumbnail = data;
-                    });
                 };
 
-            }
+            }]
 
         };
     })
@@ -364,7 +400,7 @@ angular.module('angularPressThemeApp', [
         return {
             restrict: 'EA',
             templateUrl: localizePathTo.views + 'directives/sidebar-search-posts.html',
-            controller: function ($scope, $http) {
+            controller: ['$scope', '$http', function ($scope, $http) {
 
                 $scope.resetSearchinpostssidebar = function () {
                     
@@ -386,7 +422,7 @@ angular.module('angularPressThemeApp', [
                         });
                 };
 
-            }
+            }]
 
         };
     })
@@ -394,35 +430,35 @@ angular.module('angularPressThemeApp', [
         return {
             restrict: 'EC',
             templateUrl: localizePathTo.views + 'directives/main-sidebar.html',
-            controller: function ($scope, dataFactory) {
+            controller: ['$scope', 'dataFactory', function ($scope, dataFactory) {
                 
                 dataFactory.getWidgetMainSidebar().success(function (data) {
                     $scope.mainSidebarData = data;
                 });
-            }
+            }]
         };
     })
     .directive('footerSidebarLeft', function () {
         return {
             restrict: 'EC',
             templateUrl: localizePathTo.views + 'directives/footer-sidebar-left.html',
-            controller: function ($scope, dataFactory) {
+            controller: ['$scope', 'dataFactory', function ($scope, dataFactory) {
                 dataFactory.getWidgetFooterSidebarLeft().success(function (data) {
                     $scope.footerSidebarLeftData = data;
                 });
-            }
+            }]
         };
     })
     .directive('footerSidebarRight', function () {
         return {
             restrict: 'EC',
             templateUrl: localizePathTo.views + 'directives/footer-sidebar-right.html',
-            controller: function ($scope, dataFactory) {
+            controller: ['$scope', 'dataFactory', function ($scope, dataFactory) {
                 
                 dataFactory.getWidgetFooterSidebarRight().success(function (data) {
                     $scope.footerSidebarRightData = data;
                 });
-            }
+            }]
         };
     })
     .directive('aptSidebar', function () {
@@ -455,18 +491,18 @@ angular.module('angularPressThemeApp', [
         return {
             restrict: 'EA',
             templateUrl: localizePathTo.views + 'directives/menus/header-menu.html',
-            controller: function ($scope, dataFactory) {
+            controller: ['$scope', 'dataFactory', function ($scope, dataFactory) {
                 dataFactory.getHeaderMenu().success(function (data) {
                     $scope.headerMenu = data;
                 });
-            }
+            }]
         };
     })
     .directive('headerMenuMobile', function () {
         return {
             restrict: 'EA',
             templateUrl: localizePathTo.views + 'directives/menus/header-menu-mobile.html',
-            controller: function ($scope, dataFactory) {
+            controller: ['$scope', 'dataFactory', function ($scope, dataFactory) {
                 dataFactory.getHeaderMenu().success(function (data) {
                     $scope.headerMenuMobile = data;
                 });
@@ -483,25 +519,18 @@ angular.module('angularPressThemeApp', [
                     }
                     
                 };
-            }
+            }]
         };
     })
     .directive('footerMenu', function () {
         return {
             restrict: 'EA',
             templateUrl: localizePathTo.views + 'directives/menus/footer-menu.html',
-            controller: function ($scope, dataFactory) {
+            controller: ['$scope', 'dataFactory', function ($scope, dataFactory) {
                 dataFactory.getFooterMenu().success(function (data) {
                     $scope.footerMenu = data;
                 });
-            }
-        };
-    })
-    .directive('contactForm', function () {
-        return {
-            restrict: 'EA',
-            templateUrl: localizePathTo.views + 'directives/contact-form.html',
-            controller: 'processFormCtrl'
+            }]
         };
     })
     .directive('aptBannerImage', function () {
@@ -523,12 +552,12 @@ angular.module('angularPressThemeApp', [
                 }
                 
             },
-            controller: function ($scope, dataFactory) {
+            controller: ['$scope', 'dataFactory', function ($scope, dataFactory) {
 
                 dataFactory.getBlogInfo().success(function (data) {
                     $scope.blog = data;
                 });
-            }
+            }]
         };
     })
     .directive('aptImage', function () {

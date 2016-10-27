@@ -39,8 +39,8 @@
 <aside class="container" ng-repeat="post in postsinsidebar">
     <div class="row">
         <div class=" col s10 offset-s1 card-panel hoverable">
-            <div class="card-image center" ng-repeat="img in thumbnailinsidebar | filterBy: ['id']: post.featured_media">
-                <img id="img-sidebar-search-posts" ng-src="{{img.media_details.sizes.medium.source_url}}">
+            <div class="card-image center">
+                <featured-media media-id="{{post.featured_media}}" media-size="thumbnail"></featured-media>
             </div>
             <div class="card-content nano nano-sidebar" nanoscroller>
                 <div class="nano-content p-in-sidebar">

@@ -4,11 +4,10 @@
         <div class="row">
             <div class="col s12" ng-if="!is404">
                 <div class="card">
-                    <div class="card-image" ng-repeat="img in media | filterBy: ['id']: page.featured_media">
-                        <img class="aligncenter" ng-src="{{img.media_details.sizes.medium.source_url}}">
+                    <div class="card-image">
+                        <featured-media media-id="{{::page.featured_media}}"></featured-media>
                     </div>
                     <div class="card-content">
-                        <h2 ng-bind-html="page.title.rendered"></h2>
                         <div class="flow-text" ng-bind-html="page.content.rendered"></div>
                     </div>
                 </div>

@@ -286,6 +286,103 @@ div.widget ul li a {
     transition: .2s ease-out;
     cursor: pointer;
 }
+.widget ul li a {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#logo-js {
+    background-position: 0 0
+}
+
+#flag-de,
+#logo-js {
+    background-image: url(http://localhost/projekte/Angular-Press-Theme-App/wp-content/uploads/2016/10/logos_sprite_50x700.png)
+}
+
+#flag-de {
+    background-position: 0 650px
+}
+
+#flag-uk {
+    background-position: 0 600px
+}
+
+#flag-pl,
+#flag-uk {
+    background-image: url(http://localhost/projekte/Angular-Press-Theme-App/wp-content/uploads/2016/10/logos_sprite_50x700.png)
+}
+
+#flag-pl {
+    background-position: 0 550px
+}
+
+#logo-jquery {
+    background-position: 0 500px
+}
+
+#logo-angularjs,
+#logo-jquery {
+    background-image: url(http://localhost/projekte/Angular-Press-Theme-App/wp-content/uploads/2016/10/logos_sprite_50x700.png)
+}
+
+#logo-angularjs {
+    background-position: 0 450px
+}
+
+#logo-bootstrap {
+    background-position: 0 400px
+}
+
+#logo-bootstrap,
+#logo-materialize {
+    background-image: url(http://localhost/projekte/Angular-Press-Theme-App/wp-content/uploads/2016/10/logos_sprite_50x700.png)
+}
+
+#logo-materialize {
+    background-position: 0 350px
+}
+
+#logo-foundation {
+    background-position: 0 300px
+}
+
+#logo-font-awesome,
+#logo-foundation {
+    background-image: url(http://localhost/projekte/Angular-Press-Theme-App/wp-content/uploads/2016/10/logos_sprite_50x700.png)
+}
+
+#logo-font-awesome {
+    background-position: 0 250px
+}
+
+#logo-yoeman {
+    background-position: 0 200px
+}
+
+#logo-grunt,
+#logo-yoeman {
+    background-image: url(http://localhost/projekte/Angular-Press-Theme-App/wp-content/uploads/2016/10/logos_sprite_50x700.png)
+}
+
+#logo-grunt {
+    background-position: 0 150px
+}
+
+#logo-gulp {
+    background-position: 0 100px
+}
+
+#logo-bower,
+#logo-gulp {
+    background-image: url(http://localhost/projekte/Angular-Press-Theme-App/wp-content/uploads/2016/10/logos_sprite_50x700.png)
+}
+
+#logo-bower {
+    background-position: 0 50px
+}
 
 /* Animation classes */
 
@@ -451,14 +548,14 @@ h3.widget-title a.rsswidget{
 }
 
 .nano-page {
-    height: 200px;
+    height: 300px;
     position: relative;
     width: 100%;
     overflow: hidden;
 }
 
 .nano-content {
-    height: 250px;
+    height: 280px;
     position: relative;
     width: 100%;
     overflow: hidden;

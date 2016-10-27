@@ -7,9 +7,10 @@
                 <div class="card hoverable">
                     <div class="card-content nano nano-page" nanoscroller>
                         <div class="nano-content">
-                           <div class="card-image center" ng-repeat="img in thumbnailInPostsByCategory | filterBy: ['id']: pbc.featured_media">
-                                <img lazy-img="{{img.source_url}}" style="width: 60%;">
+                           <div class="card-image center">
+                               <featured-media media-id="{{pbc.featured_media}}"></featured-media>
                             </div>
+                            <br>
                             <b><span class="card-title bolder" ng-bind-html="pbc.title.rendered"></span></b>
                             <p class="flow-text" ng-bind-html="pbc.content.rendered"></p>
                         </div>
@@ -27,7 +28,7 @@
             <br />
             <div class="row">
                 <div class="col s4 m2">
-                    Gesamnt: {{ range.total }}
+                    Total: {{ range.total }}
                 </div>
                 <div class="col s4 m8 center">
                     <ul class="pagination" ng-if="1 < pages.length || !autoHide">

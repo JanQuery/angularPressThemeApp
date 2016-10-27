@@ -1,7 +1,7 @@
 <div class="row" ng-repeat="p in ::pagesAndPost | where: {'slug': slugParam}">
    
-    <div class="card-image center" ng-repeat="img in ::media | filterBy: ['id']: p.featured_media" ng-if="p.featured_media != 0">
-        <img ng-src="{{img.media_details.sizes.medium.source_url}}">
+    <div class="card-image center">
+        <featured-media media-id="{{p.featured_media}}" media-size="full"></featured-media>
     </div>
     
     <h1 ng-bind-html="p.title.rendered"></h1>

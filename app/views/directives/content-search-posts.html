@@ -30,8 +30,8 @@
 
             <div class="col s12 m4" dir-paginate="post in posts | itemsPerPage: 6">
                 <div class="card hoverable">
-                    <div class="card-image" ng-repeat="img in ::thumbnail | filterBy: ['id']: post.featured_media">
-                        <img id="img-content-searh-posts" class="aligncenter" ng-src="{{img.media_details.sizes.medium.source_url}}">
+                    <div class="card-image">
+                        <featured-media media-id="{{post.featured_media}}"></featured-media>
                     </div>
                     <div class="card-content nano nano-content">
                         <div class="nano-content">

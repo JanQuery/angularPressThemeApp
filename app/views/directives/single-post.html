@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col s12" ng-if="!is404">
                 <div class="card">
-                    <div class="card-image" ng-repeat="img in media | filterBy: ['id']: post.featured_media">
-                        <img class="aligncenter" ng-src="{{img.media_details.sizes.medium.source_url}}" style="max-width: 300px; max-height: 300px;">
+                    <div class="card-image">
+                        <featured-media media-id="{{::post.featured_media}}"></featured-media>
                     </div>
                     <div class="card-content">
                         <h2 ng-bind-html="post.title.rendered"></h2>
