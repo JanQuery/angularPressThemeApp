@@ -328,24 +328,24 @@ angular.module('angularPressThemeApp', [
                 var mediaId     = $scope.mediaId;
                 var mediaSize   = $scope.mediaSize;
                 
-                if ( mediaId !== 0 && !mediaSize) {
+                if ( mediaId != 0 && !mediaSize) {
                     $http.get('wp-json/wp/v2/media/' + mediaId).success(function(data){
                         $scope.featuredMediaImage = data.media_details.sizes.medium.source_url;
                     });
                 }
                 
-                if ( mediaId !== 0 && mediaSize === 'thumbnail' ) {
+                if ( mediaId != 0 && mediaSize === 'thumbnail' ) {
                     $http.get('wp-json/wp/v2/media/' + mediaId).success(function(data){
                         $scope.featuredMediaImage = data.media_details.sizes.thumbnail.source_url;
                     });
                 }
                 
-                if ( mediaId !== 0 && mediaSize === 'medium' ) {
+                if ( mediaId != 0 && mediaSize === 'medium' ) {
                     $http.get('wp-json/wp/v2/media/' + mediaId).success(function(data){
                         $scope.featuredMediaImage = data.media_details.sizes.medium.source_url;
                     });
                 }
-                if ( mediaId !== 0 && mediaSize === 'full' ) {
+                if ( mediaId != 0 && mediaSize === 'full' ) {
                     $http.get('wp-json/wp/v2/media/' + mediaId).success(function(data){
                         $scope.featuredMediaImage = data.media_details.sizes.full.source_url;
                     });
