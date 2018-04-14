@@ -1,4 +1,4 @@
-<li ng-repeat="hm in headerMenu" ng-if="headerMenu != 0" nav-dropdown-button>
+<li ng-repeat="hm in headerMenu" ng-if="headerMenu" nav-dropdown-button>
     <a ng-href="{{hm.url}}" ng-class="{'nav-dropdown-button' : hm.children != 0}" data-beloworigin="true" data-hover="true" data-activates='nav-dropdown-{{hm.ID}}' ng-bind-html="hm.title">#</a>
     <ul id="nav-dropdown-{{hm.ID}}" class="dropdown-content" ng-if="hm.children != 0">
         <li ng-repeat="c in ::hm.children">
